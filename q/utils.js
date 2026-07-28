@@ -1,0 +1,47 @@
+function copyToClipboard(content) {
+    navigator.clipboard.writeText(typeof content === "object" ? JSON.stringify(content) : content);
+}
+
+function loadFromLocalStorage(key) {
+  return JSON.parse(localStorage.getItem(key)) || [];
+}
+
+function saveToLocalStorage(key, contents) {
+    localStorage.setItem(key, JSON.stringify(contents));
+}
+
+function capitalizeFirstLetter(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
+
+// Escape HTML to prevent XSS
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+function flashBanner() {
+    const modal = document.getElementById('alert-msg');
+    modal.classList.add('show');
+
+    setTimeout(() => {
+        modal.classList.remove('show');
+    }, 3000);
+}
+
+function formatDate(dateString) {
+  if (!dateString) return '';
+  const date = new Date(dateString);
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+  if (date.toDateString() === today.toDateString()) {
+    return 'Today';
+  } else if (date.toDateString() === tomorrow.toDateString()) {
+    return 'Tomorrow';
+  } else {
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  }
+}

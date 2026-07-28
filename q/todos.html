@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My App</title>
+  <link rel="stylesheet" href="common.css" />
+  <link rel="stylesheet" href="todos.css" />
+</head>
+
+<body>
+  <div class="container">
+    <h1>To-Do List</h1>
+
+    <form id="todoForm" class="todo-form">
+      <h2>Add New Task</h2>
+
+      <div class="form-group">
+        <label for="name">Task Name *</label>
+        <input type="text" id="nameInput" name="name" placeholder="What needs to be done?" required />
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="descriptionInput" class="value-textarea" name="description"
+          placeholder="Additional details (optional)"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="dueDate">Due Date</label>
+        <input type="date" id="dueDateInput" name="dueDate" />
+      </div>
+
+      <div id="todoId" data-id=""></div>
+
+      <button type="submit" class="save-btn">Add Task</button>
+      <button id="edit-btn" class="add-btn">Edit Task</button>
+    </form>
+  </div>
+
+  <div id="todoList" class="todo-container"></div>
+
+  <script src="utils.js"></script>
+  <script src="todo.js"></script>
+</body>
+
+</html>

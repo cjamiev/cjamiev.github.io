@@ -1,0 +1,31 @@
+.clipboard-list {
+    display: flex;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.clipboard-item {
+    background: #f8f9fa;
+    display: flex;
+    margin-bottom: 10px;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s;
+    border-left: 4px solid #667eea;
+    max-width: 300px;
+}
+
+.clipboard-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.clipboard-info {
+    flex: 1;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+    word-break: break-all;
+    font-size: 24px;
+    padding: 8px;
+}

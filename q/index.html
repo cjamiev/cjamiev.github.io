@@ -1,17 +1,141 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Q</title>
-  <script type="module" crossorigin src="q.js"></script>
-  <link rel="stylesheet" crossorigin href="q.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Page</title>
+    <link rel="stylesheet" href="common.css" />
+    <link rel="stylesheet" href="bookmarks.css" />
+    <link rel="stylesheet" href="clipboards.css" />
+    <link rel="stylesheet" href="todos.css" />
+    <style>
+        .nav-link {
+            text-decoration: none;
+            font-size: 20px;
+            color: #667eea;
+            margin-right: 8px;
+        }
+
+        .nav-link:hover {
+            text-decoration: underline;
+        }
+
+        .favorites-container {
+            position: relative;
+            display: flex;
+            margin-top: 12px;
+            gap: 20px;
+
+            div {
+                flex: 1;
+            }
+        }
+    </style>
 </head>
 
 <body>
-  <div id="root"></div>
+    <div class="container">
+        <h1>My Page</h1>
+        <a class="nav-link" href="bookmarks.html">Bookmarks</a>
+        <a class="nav-link" href="clipboards.html">Clipboards</a>
+        <a class="nav-link" href="todos.html">Todos</a>
 
+        <div id="alert-msg" class="alert-msg">Copied</div>
+    </div>
+
+    <div class="container">
+        <div id="favorites-container" class="favorites-container">
+            <div id="bookmarkList" class="bookmark-list"></div>
+            <div id="clipboardList" class="clipboard-list"></div>
+        </div>
+    </div>
+
+    <div id="todoList" class="todo-container"></div>
+
+    <script src="utils.js"></script>
+    <script src="todo.js"></script>
+    <script>
+        function renderFavorites() {
+            const bookmarks = loadFromLocalStorage('bookmarks');
+            const favoriteBookmarks = bookmarks.filter(b => b.isFavorite);
+
+            const bookmarkList = favoriteBookmarks.map(bookmark => `
+              <li class="bookmark-item">
+                <div class="bookmark-info">
+                    <a href="${escapeHtml(bookmark.url)}" target="_blank" class="bookmark-url">
+                      <div class="bookmark-name">${bookmark.name}</div>
+                    </a>
+                    </div>
+                ${bookmark.username ? `<button id="${bookmark.id}-username-copy-btn" class="copy-btn">${bookmark.username}</button>` : ''}
+                ${bookmark.password ? `<button id="${bookmark.id}-password-copy-btn" class="copy-btn">Password</button>` : ''}
+              </li>
+            `).join('');
+
+            const bookmarkSection = document.getElementById('bookmarkList');
+
+            bookmarkSection.innerHTML = `
+              <div>
+                <h2>Favorite Links</h2>
+                <ul>
+                  ${bookmarkList}
+                </ul>
+              </div>
+            `;
+
+            // Attach the click event separately 
+            favoriteBookmarks.forEach(bookmarkItem => {
+                if (bookmarkItem.username) {
+                    document.getElementById(`${bookmarkItem.id}-username-copy-btn`).onclick = () => {
+                        copyToClipboard(bookmarkItem.username);
+                        flashBanner();
+                    };
+                }
+                if (bookmarkItem.password) {
+                    document.getElementById(`${bookmarkItem.id}-password-copy-btn`).onclick = () => {
+                        copyToClipboard(bookmarkItem.password);
+                        flashBanner();
+                    };
+                }
+            });
+
+
+            const clipboards = loadFromLocalStorage('clipboards');
+            const favoriteClipboards = clipboards.filter(c => c.isFavorite);
+
+            const clipboardList = favoriteClipboards.map(clipboard => `
+              <li class="clipboard-item">
+                <div class="clipboard-info">              
+                  <button id="${clipboard.id}-copy-btn" class="copy-btn">${clipboard.name}</button>
+                </div>
+              </li>
+            `).join('');
+            const clipboardSection = document.getElementById('clipboardList');
+
+            clipboardSection.innerHTML = `
+              <div>
+                <h2>Favorite Clips</h2>
+                <ul>
+                  ${clipboardList}
+                </ul>
+              </div>
+            `;
+
+            // Attach the click event separately 
+            favoriteClipboards.forEach(clipItem => {
+                document.getElementById(`${clipItem.id}-copy-btn`).onclick = () => {
+                    copyToClipboard(clipItem.value);
+                    flashBanner();
+                };
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderFavorites();
+            renderTodos();
+        });
+
+    </script>
 </body>
 
 </html>

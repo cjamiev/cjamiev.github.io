@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clipboard Manager</title>
+  <style>
+  </style>
+  <link rel="stylesheet" href="common.css" />
+  <link rel="stylesheet" href="clipboards.css" />
+</head>
+
+<body>
+  <div class="container">
+    <h1>My Clipboards</h1>
+
+    <div id="clipboard-container" class="form-container">
+      <div class="input-group">
+        <div class="form-group">
+          <label for="nameInput">Name:</label>
+          <input type="text" id="nameInput" placeholder="Clip Name" />
+        </div>
+
+        <div class="form-group">
+          <label for="typeInput">Type:</label>
+          <input type="text" id="typeInput" placeholder="Defaults to Other" />
+          <div id="type-tags" class="type-tags-container"></div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="valueInput">Value to Copy:</label>
+        <textarea id="valueInput" class="value-textarea" placeholder="Enter the text you want to copy..."
+          spellcheck="false"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="isFavoriteInput">Is Favorite:</label>
+        <input type="checkbox" id="isFavoriteInput" class="is-favorite-checkbox"></input>
+      </div>
+
+      <div id="clipboardId" data-id=""></div>
+
+      <div class="btn-group">
+        <button id="save-btn" class="save-btn" onclick="addClipboard()">Save</button>
+      </div>
+    </div>
+
+    <div class="search-container">
+      <input type="text" id="searchInput" class="search-input" placeholder="Search" onkeyup="filterClipboards()" />
+      <button id="add-btn" class="add-btn" onclick="toggleAddForm()">Add</button>
+    </div>
+
+    <!-- Modal -->
+    <div id="modalOverlay" class="modal-overlay"></div>
+    <div id="myModal" class="modal">
+      <span class="modal-close-btn" id="closeModalBtn" onclick="hideModal()">&times;</span>
+      <h2 id="modal-title">Modal Title</h2>
+      <pre id="modal-content" class="modal-content">This is a modal with a dimmed background.</pre>
+    </div>
+
+    <div id="alert-msg" class="alert-msg">Copied</div>
+  </div>
+
+  <div class="container">
+    <div class="edit-container">
+      <button id="edit-btn" class="add-btn" onclick="toggleEditMode()">Edit</button>
+      <button class="copy-btn" onclick="copyClipboards()">Export</button>
+    </div>
+    <div id="clipboardList" class="clipboard-list"></div>
+  </div>
+
+  <script src="utils.js"></script>
+  <script src="clipboards.js"></script>
+</body>
+
+</html>
