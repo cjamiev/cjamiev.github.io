@@ -1,11 +1,6 @@
 // Initialize clipboards from localStorage or empty array
 let clipboards = loadFromLocalStorage('clipboards');
 
-function copyClipboards() {
-    copyToClipboard(clipboards);
-    flashBanner();
-}
-
 // Save clipboards to localStorage
 function saveClipboards() {
     saveToLocalStorage('clipboards', clipboards);
@@ -128,7 +123,7 @@ function addClipboard() {
     }
 
     const clipboard = {
-        id: Date.now(),
+        id: isNew ? Date.now() : id,
         name,
         value,
         type: type ? capitalizeFirstLetter(type) : 'Other',
@@ -170,7 +165,7 @@ function editClipboard(id) {
 // Delete a clipboard
 function deleteClipboard(id) {
     if (confirm('Are you sure you want to delete this clipboard?')) {
-        clipboards = clipboards.filter(clipboard => clipboard.id !== id);
+        clipboards = clipboards.filter(clipboard => clipboard.id != id);
         saveClipboards();
         renderClipboards();
         renderClipboardTypes();
@@ -187,8 +182,7 @@ function filterClipboards() {
     }
 
     const filtered = clipboards.filter(clipboard =>
-        clipboard.name.toLowerCase().includes(searchText) ||
-        clipboard.url.toLowerCase().includes(searchText)
+        clipboard.name.toLowerCase().includes(searchText)
     );
 
     renderClipboards(filtered);

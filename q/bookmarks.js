@@ -1,11 +1,6 @@
 // Initialize bookmarks from localStorage or empty array
 let bookmarks = loadFromLocalStorage('bookmarks');
 
-function copyBookmarks() {
-    copyToClipboard(bookmarks);
-    flashBanner();
-}
-
 // Save bookmarks to localStorage
 function saveBookmarks() {
     saveToLocalStorage('bookmarks', bookmarks);

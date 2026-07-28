@@ -59,7 +59,7 @@ function addTodo() {
   }
 
   const newTodo = {
-    id: Date.now(),
+    id: isNew ? Date.now() : id,
     name,
     description,
     dueDate,
@@ -105,7 +105,7 @@ function editTodo(id) {
 
 function deleteTodo(id) {
   if (confirm('Are you sure you want to delete this todo?')) {
-    todos = todos.filter(todo => todo.id !== id);
+    todos = todos.filter(todo => todo.id != id);
     saveTodos();
     renderTodos();
     setupEventListeners();

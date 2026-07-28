@@ -31,6 +31,12 @@
                 flex: 1;
             }
         }
+
+        .backup-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
     </style>
 </head>
 
@@ -40,8 +46,10 @@
         <a class="nav-link" href="bookmarks.html">Bookmarks</a>
         <a class="nav-link" href="clipboards.html">Clipboards</a>
         <a class="nav-link" href="todos.html">Todos</a>
+        <a class="nav-link" href="notes.html">Notes</a>
 
         <div id="alert-msg" class="alert-msg">Copied</div>
+        <button class="backup-btn" onclick="backupLocalStorage()">Backup</button>
     </div>
 
     <div class="container">
