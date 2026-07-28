@@ -114,7 +114,7 @@
             const clipboardList = favoriteClipboards.map(clipboard => `
               <li class="clipboard-item">
                 <div class="clipboard-info">              
-                  <button id="${clipboard.id}-copy-btn" class="copy-btn">${clipboard.name}</button>
+                  <button id="${clipboard.id}-copy-btn" class="clipboard-btn">${clipboard.name}</button>
                 </div>
               </li>
             `).join('');
@@ -129,7 +129,6 @@
               </div>
             `;
 
-            // Attach the click event separately 
             favoriteClipboards.forEach(clipItem => {
                 document.getElementById(`${clipItem.id}-copy-btn`).onclick = () => {
                     copyToClipboard(clipItem.value);
@@ -141,6 +140,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             renderFavorites();
             renderTodos();
+            setupTodoEventListeners();
         });
 
     </script>

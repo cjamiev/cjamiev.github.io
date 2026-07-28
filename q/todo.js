@@ -18,7 +18,7 @@ function init() {
   }
 }
 
-function setupEventListeners() {
+function setupTodoEventListeners() {
   document.querySelectorAll('.delete-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
       const todoId = parseInt(btn.dataset.id);
@@ -84,7 +84,7 @@ function addTodo() {
   clearForm();
   renderTodos();
   resetToView();
-  setupEventListeners();
+  setupTodoEventListeners();
 }
 
 function clearForm() {
@@ -108,7 +108,7 @@ function deleteTodo(id) {
     todos = todos.filter(todo => todo.id != id);
     saveTodos();
     renderTodos();
-    setupEventListeners();
+    setupTodoEventListeners();
   }
 }
 
@@ -124,7 +124,7 @@ function toggleComplete(id) {
   });
   saveTodos();
   renderTodos();
-  setupEventListeners();
+  setupTodoEventListeners();
 }
 
 function saveTodos() {
@@ -191,9 +191,8 @@ function renderTodos() {
   });
 }
 
-// Initialize the app when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
   renderTodos();
   init();
-  setupEventListeners();
+  setupTodoEventListeners();
 });

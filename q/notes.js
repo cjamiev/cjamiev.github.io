@@ -5,7 +5,6 @@ function copyNotes() {
     flashBanner();
 }
 
-// Save notes to localStorage
 function saveNotes() {
     saveToLocalStorage('notes', notes);
 }
@@ -62,7 +61,6 @@ function renderNotes(list = notes) {
         </div>
       `).join('');
 
-    // Attach the click event separately 
     list.forEach(noteItem => {
         document.getElementById(`${noteItem.id}-edit-btn`).onclick = () => {
             editNote(noteItem.id);
@@ -130,6 +128,8 @@ function addNote() {
 function editNote(id) {
     const matched = notes.find(c => c.id == id);
 
+    document.querySelectorAll('.active').forEach(item => item.classList.remove('active'));
+    document.getElementById(`${id}-edit-btn`).parentElement.parentElement.classList.add('active');
     document.getElementById('display-name').innerHTML = matched.name;
     document.getElementById('display-date').innerHTML = 'Last Updated ' + formatDate(matched.updatedAt);
     document.getElementById('nameInput').value = matched.name;
@@ -148,7 +148,6 @@ function deleteNote() {
     }
 }
 
-// Filter notes by search text
 function filterNotes() {
     const searchText = document.getElementById('searchInput').value.toLowerCase();
 
@@ -174,19 +173,21 @@ function selectLatest() {
 }
 
 function showCreateModal() {
+    document.getElementById('modal-title').innerHTML = 'Add New Note';
     document.getElementById('nameInput').value = '';
     document.getElementById('valueInput').value = '';
     document.getElementById('typeInput').value = '';
     document.getElementById('noteId').setAttribute('data-id', '');
-
+    
     const modal = document.getElementById('myModal');
     const overlay = document.getElementById('modalOverlay');
-
+    
     modal.style.display = 'block';
     overlay.style.display = 'block';
 }
 
 function showEditModal() {
+    document.getElementById('modal-title').innerHTML = 'Edit Note';
     const modal = document.getElementById('myModal');
     const overlay = document.getElementById('modalOverlay');
 
@@ -208,7 +209,6 @@ function createNewNote() {
     selectLatest();
 }
 
-// Load notes on page load
 document.addEventListener('DOMContentLoaded', () => {
     renderNotes();
     renderNoteTypes();

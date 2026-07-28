@@ -13,8 +13,13 @@
 }
 
 .bookmark-item:hover {
+    background:#667eea;
     transform: translateX(5px);
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+
+    a, div {
+        color: white;
+    }
 }
 
 .bookmark-info {

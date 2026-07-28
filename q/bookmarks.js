@@ -1,7 +1,5 @@
-// Initialize bookmarks from localStorage or empty array
 let bookmarks = loadFromLocalStorage('bookmarks');
 
-// Save bookmarks to localStorage
 function saveBookmarks() {
     saveToLocalStorage('bookmarks', bookmarks);
 }
@@ -23,7 +21,6 @@ function bookmarksByType(list) {
       `).join('');
 }
 
-// Render bookmarks to the list
 function renderBookmarks(list = bookmarks) {
     const bookmarkList = document.getElementById('bookmarkList');
 
@@ -50,7 +47,6 @@ function renderBookmarks(list = bookmarks) {
         </div>
       `).join('');
 
-    // Attach the click event separately 
     list.forEach(bookmarkItem => {
         if (bookmarkItem.username) {
             document.getElementById(`${bookmarkItem.id}-username-copy-btn`).onclick = () => {
@@ -84,7 +80,6 @@ function clearForm() {
     document.getElementById('isFavoriteInput').checked = false;
 }
 
-// Add a new bookmark
 function addBookmark() {
     const nameInput = document.getElementById('nameInput');
     const urlInput = document.getElementById('urlInput');
@@ -142,7 +137,6 @@ function addBookmark() {
     }
     saveBookmarks();
 
-    // Clear inputs
     clearForm();
     renderBookmarks();
     renderBookmarkTypes();
@@ -162,7 +156,6 @@ function editBookmark(id) {
     document.getElementById('bookmarkId').setAttribute('data-id', matched.id);
 }
 
-// Delete a bookmark
 function deleteBookmark(id) {
     if (confirm('Are you sure you want to delete this bookmark?')) {
         bookmarks = bookmarks.filter(bookmark => bookmark.id != id);
@@ -172,7 +165,6 @@ function deleteBookmark(id) {
     }
 }
 
-// Filter bookmarks by search text
 function filterBookmarks() {
     const searchText = document.getElementById('searchInput').value.toLowerCase();
 
@@ -230,7 +222,6 @@ function selectType(type) {
     document.getElementById('typeInput').value = type.trim();
 }
 
-// Load bookmarks on page load
 document.addEventListener('DOMContentLoaded', () => {
     renderBookmarks();
     renderBookmarkTypes();

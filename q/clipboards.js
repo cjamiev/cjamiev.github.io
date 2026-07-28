@@ -1,7 +1,5 @@
-// Initialize clipboards from localStorage or empty array
 let clipboards = loadFromLocalStorage('clipboards');
 
-// Save clipboards to localStorage
 function saveClipboards() {
     saveToLocalStorage('clipboards', clipboards);
 }
@@ -37,7 +35,7 @@ function clipboardsByType(list) {
         <li class="clipboard-item">
           <div class="favorite-star">${clipboard.isFavorite ? '&#9733;' : ''}</div>
           <div class="clipboard-info">              
-            <button id="${clipboard.id}-copy-btn" class="copy-btn">${clipboard.name}</button>
+            <button id="${clipboard.id}-copy-btn" class="clipboard-btn">${clipboard.name}</button>
             <button class="view-btn" onclick="viewClipboard(${clipboard.id})">V</button>
           </div>
           <button class="edit-btn" onclick="editClipboard(${clipboard.id})">E</button>
@@ -46,7 +44,6 @@ function clipboardsByType(list) {
       `).join('');
 }
 
-// Render clipboards to the list
 function renderClipboards(list = clipboards) {
     const clipboardList = document.getElementById('clipboardList');
 
@@ -97,7 +94,6 @@ function clearForm() {
     document.getElementById('isFavoriteInput').checked = false;
 }
 
-// Add a new clipboard
 function addClipboard() {
     const nameInput = document.getElementById('nameInput');
     const valueInput = document.getElementById('valueInput');
@@ -144,7 +140,6 @@ function addClipboard() {
     }
     saveClipboards();
 
-    // Clear inputs
     clearForm();
     renderClipboards();
     renderClipboardTypes();
@@ -162,7 +157,6 @@ function editClipboard(id) {
     document.getElementById('clipboardId').setAttribute('data-id', matched.id);
 }
 
-// Delete a clipboard
 function deleteClipboard(id) {
     if (confirm('Are you sure you want to delete this clipboard?')) {
         clipboards = clipboards.filter(clipboard => clipboard.id != id);
@@ -172,7 +166,6 @@ function deleteClipboard(id) {
     }
 }
 
-// Filter clipboards by search text
 function filterClipboards() {
     const searchText = document.getElementById('searchInput').value.toLowerCase();
 
@@ -228,7 +221,6 @@ function selectType(type) {
     document.getElementById('typeInput').value = type.trim();
 }
 
-// Load clipboards on page load
 document.addEventListener('DOMContentLoaded', () => {
     renderClipboards();
     renderClipboardTypes();

@@ -12,55 +12,57 @@
 </head>
 
 <body>
-  <h1>My Notes</h1>
-  <div class="layout">
-    <div class="note-container note-navigation">
-      <input type="text" id="searchInput" class="search-input note-search" placeholder="Search"
-        onkeyup="filterNotes()" />
-      <button class="add-btn" onclick="showCreateModal()">+ Create New Note</button>
-      <div id="noteList" class="noteList"></div>
-    </div>
+  <div class="page-container">
+    <h1 class="title">My Notes</h1>
+    <div class="layout">
+      <div class="note-container note-navigation">
+        <input type="text" id="searchInput" class="search-input note-search" placeholder="Search"
+          onkeyup="filterNotes()" />
+        <button class="add-btn" onclick="showCreateModal()">+ Create New Note</button>
+        <div id="noteList" class="noteList"></div>
+      </div>
 
-    <div class="note-container">
-      <div id="note-container" class="note-container">
-        <div class="display-container">
-          <div id="display-name" class="display-field">Name</div>
-          <div id="display-date" class="display-date-field">Last Updated</div>
-        </div>
+      <div class="note-container">
+        <div id="note-container" class="note-container">
+          <div class="display-container">
+            <div id="display-name" class="display-field">Name</div>
+            <div id="display-date" class="display-date-field">Last Updated</div>
+          </div>
 
-        <div>
-          <textarea id="valueInput" class="notes-detail-content" placeholder="Enter your notes..."
-            spellcheck="false"></textarea>
-        </div>
+          <div>
+            <textarea id="valueInput" class="notes-detail-content" placeholder="Enter your notes..."
+              spellcheck="false"></textarea>
+          </div>
 
-        <div id="noteId" data-id=""></div>
+          <div id="noteId" data-id=""></div>
 
-        <div class="btn-group">
-          <button id="save-btn" class="save-btn" onclick="addNote()">Save</button>
-          <button id="delete-btn" class="edit-btn show" onclick="showEditModal()">Edit Name/Type</button>
-          <button id="delete-btn" class="delete-btn show" onclick="deleteNote()">Delete</button>
+          <div class="btn-group">
+            <button id="save-btn" class="save-btn" onclick="addNote()">Save</button>
+            <button id="delete-btn" class="edit-btn show" onclick="showEditModal()">Edit Name/Type</button>
+            <button id="delete-btn" class="delete-btn show" onclick="deleteNote()">Delete</button>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Modal -->
-    <div id="modalOverlay" class="modal-overlay"></div>
-    <div id="myModal" class="modal">
-      <span class="modal-close-btn" id="closeModalBtn" onclick="hideCreateModal()">&times;</span>
-      <h2 id="modal-title">Add New Note</h2>
-      <div class="input-group">
-        <div class="form-group">
-          <label for="nameInput">Name:</label>
-          <input type="text" id="nameInput" placeholder="Note Name" required />
-        </div>
+      <!-- Modal -->
+      <div id="modalOverlay" class="modal-overlay"></div>
+      <div id="myModal" class="modal">
+        <span class="modal-close-btn" id="closeModalBtn" onclick="hideCreateModal()">&times;</span>
+        <h2 id="modal-title">Add New Note</h2>
+        <div class="input-group">
+          <div class="form-group">
+            <label for="nameInput">Name:</label>
+            <input type="text" id="nameInput" placeholder="Note Name" required />
+          </div>
 
-        <div class="form-group">
-          <label for="typeInput">Type:</label>
-          <input type="text" id="typeInput" placeholder="Other" />
-          <div id="type-tags" class="type-tags-container"></div>
+          <div class="form-group">
+            <label for="typeInput">Type:</label>
+            <input type="text" id="typeInput" placeholder="Other" />
+            <div id="type-tags" class="type-tags-container"></div>
+          </div>
         </div>
+        <button class="save-btn" onclick="createNewNote()">Create</button>
       </div>
-      <button class="save-btn" onclick="createNewNote()">Create</button>
     </div>
   </div>
 
