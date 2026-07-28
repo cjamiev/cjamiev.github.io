@@ -1,5 +1,14 @@
 let notes = loadFromLocalStorage('notes');
 
+function init() {
+    document.getElementById('note-copy-btn').onclick = () => {
+        const id = document.getElementById('noteId').getAttribute('data-id');
+        const selectedNote = notes.find(n => n.id === id);
+        copyToClipboard(selectedNote.value);
+        flashBanner();
+    };
+}
+
 function copyNotes() {
     copyToNote(notes);
     flashBanner();
@@ -123,6 +132,7 @@ function addNote() {
 
     renderNotes();
     renderNoteTypes();
+    document.getElementById(`${id}-edit-btn`).parentElement.parentElement.classList.add('active');
 }
 
 function editNote(id) {
@@ -174,20 +184,24 @@ function selectLatest() {
 
 function showCreateModal() {
     document.getElementById('modal-title').innerHTML = 'Add New Note';
+    document.getElementById('modal-save-btn').innerHTML = 'Create';
     document.getElementById('nameInput').value = '';
     document.getElementById('valueInput').value = '';
     document.getElementById('typeInput').value = '';
     document.getElementById('noteId').setAttribute('data-id', '');
-    
+    document.getElementById('display-name').innerHTML = '';
+    document.getElementById('display-date').innerHTML = '';
+
     const modal = document.getElementById('myModal');
     const overlay = document.getElementById('modalOverlay');
-    
+
     modal.style.display = 'block';
     overlay.style.display = 'block';
 }
 
 function showEditModal() {
     document.getElementById('modal-title').innerHTML = 'Edit Note';
+    document.getElementById('modal-save-btn').innerHTML = 'Update';
     const modal = document.getElementById('myModal');
     const overlay = document.getElementById('modalOverlay');
 
@@ -210,6 +224,7 @@ function createNewNote() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    init();
     renderNotes();
     renderNoteTypes();
     selectLatest();

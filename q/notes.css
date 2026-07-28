@@ -67,6 +67,8 @@
 
 .select-btn {
     background: #f8f9fa;
+    min-width: 185px;
+    text-align: left;
 }
 
 .display-container {

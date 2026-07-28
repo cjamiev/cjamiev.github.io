@@ -17,7 +17,8 @@
     transform: translateX(5px);
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 
-    a, div {
+    a, div, .favorite-star {
+        transform: translateX(2px);
         color: white;
     }
 }
@@ -33,6 +34,7 @@
     word-break: break-all;
     font-size: 24px;
     padding: 8px;
+    white-space: nowrap;
 }
 
 .bookmark-url {

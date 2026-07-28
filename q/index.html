@@ -32,23 +32,36 @@
             }
         }
 
+        .container:hover {
+            .backup-btn {
+                display: block;
+            }
+        }
+
         .backup-btn {
             position: absolute;
             top: 10px;
             right: 10px;
+            display: none;
+        }
+
+        .backup-btn:hover {
+            background-color: black;
+            color: white;
         }
     </style>
 </head>
 
 <body>
+    <div id="alert-msg" class="alert-msg">Successfully Copied</div>
+
     <div class="container">
-        <h1>My Page</h1>
+        <h1>Q</h1>
         <a class="nav-link" href="bookmarks.html">Bookmarks</a>
         <a class="nav-link" href="clipboards.html">Clipboards</a>
         <a class="nav-link" href="todos.html">Todos</a>
         <a class="nav-link" href="notes.html">Notes</a>
 
-        <div id="alert-msg" class="alert-msg">Copied</div>
         <button class="backup-btn" onclick="backupLocalStorage()">Backup</button>
     </div>
 
@@ -64,9 +77,15 @@
     <script src="utils.js"></script>
     <script src="todo.js"></script>
     <script>
-        function renderFavorites() {
+        function renderFavoriteLinks() {
             const bookmarks = loadFromLocalStorage('bookmarks');
             const favoriteBookmarks = bookmarks.filter(b => b.isFavorite);
+            const bookmarkSection = document.getElementById('bookmarkList');
+
+            if(!favoriteBookmarks.length) {
+                bookmarkSection.innerHTML = '<div class="empty-message">No favorite bookmarks found.</div>';
+                return;
+            }
 
             const bookmarkList = favoriteBookmarks.map(bookmark => `
               <li class="bookmark-item">
@@ -75,16 +94,15 @@
                       <div class="bookmark-name">${bookmark.name}</div>
                     </a>
                     </div>
-                ${bookmark.username ? `<button id="${bookmark.id}-username-copy-btn" class="copy-btn">${bookmark.username}</button>` : ''}
-                ${bookmark.password ? `<button id="${bookmark.id}-password-copy-btn" class="copy-btn">Password</button>` : ''}
+                ${bookmark.username ? `<button id="${bookmark.id}-username-copy-btn" class="copy-btn">Id</button>` : ''}
+                ${bookmark.password ? `<button id="${bookmark.id}-password-copy-btn" class="copy-btn">P</button>` : ''}
               </li>
             `).join('');
 
-            const bookmarkSection = document.getElementById('bookmarkList');
 
             bookmarkSection.innerHTML = `
               <div>
-                <h2>Favorite Links</h2>
+                <h2>Links</h2>
                 <ul>
                   ${bookmarkList}
                 </ul>
@@ -106,10 +124,17 @@
                     };
                 }
             });
+        }
 
-
+        function renderFavoriteClips() {
             const clipboards = loadFromLocalStorage('clipboards');
             const favoriteClipboards = clipboards.filter(c => c.isFavorite);
+            const clipboardSection = document.getElementById('clipboardList');
+
+            if(!favoriteClipboards.length) {
+                clipboardSection.innerHTML = '<div class="empty-message">No favorite clipboards found.</div>'
+                return;
+            }
 
             const clipboardList = favoriteClipboards.map(clipboard => `
               <li class="clipboard-item">
@@ -118,11 +143,10 @@
                 </div>
               </li>
             `).join('');
-            const clipboardSection = document.getElementById('clipboardList');
 
             clipboardSection.innerHTML = `
               <div>
-                <h2>Favorite Clips</h2>
+                <h2>Clips</h2>
                 <ul>
                   ${clipboardList}
                 </ul>
@@ -138,7 +162,8 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            renderFavorites();
+            renderFavoriteLinks();
+            renderFavoriteClips();
             renderTodos();
             setupTodoEventListeners();
         });

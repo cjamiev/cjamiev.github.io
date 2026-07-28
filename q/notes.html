@@ -8,10 +8,37 @@
   <link rel="stylesheet" href="common.css" />
   <link rel="stylesheet" href="notes.css" />
   <style>
+    .display-container {
+      position: relative;
+    }
+    
+    .display-container:hover {
+      .note-copy-btn {
+        display: block;
+      }
+    }
+    .note-copy-btn {
+      display: none;
+      position: absolute;
+      top: 20px;
+      right: 10px;
+      height: 30px;
+      width: 50px;
+      padding: 2px;
+      font-size: 12px;
+    }
+
+    .note-copy-btn:hover {
+      color: white;
+      background-color: black;
+    }
+
   </style>
 </head>
 
 <body>
+  <div id="alert-msg" class="alert-msg">Successfully Copied</div>
+
   <div class="page-container">
     <h1 class="title">My Notes</h1>
     <div class="layout">
@@ -27,11 +54,11 @@
           <div class="display-container">
             <div id="display-name" class="display-field">Name</div>
             <div id="display-date" class="display-date-field">Last Updated</div>
+            <button id="note-copy-btn" class="note-copy-btn">Copy</button>
           </div>
 
           <div>
-            <textarea id="valueInput" class="notes-detail-content" placeholder="Enter your notes..."
-              spellcheck="false"></textarea>
+            <textarea id="valueInput" class="notes-detail-content" placeholder="Enter your notes..." spellcheck="false" onblur="addNote()"></textarea>
           </div>
 
           <div id="noteId" data-id=""></div>
@@ -61,7 +88,7 @@
             <div id="type-tags" class="type-tags-container"></div>
           </div>
         </div>
-        <button class="save-btn" onclick="createNewNote()">Create</button>
+        <button id="modal-save-btn" class="save-btn" onclick="createNewNote()">Create</button>
       </div>
     </div>
   </div>

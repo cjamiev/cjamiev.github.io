@@ -13,8 +13,8 @@ function bookmarksByType(list) {
                 <div class="bookmark-name">${bookmark.name}</div>
               </a>
               </div>
-          ${bookmark.username ? `<button id="${bookmark.id}-username-copy-btn" class="copy-btn">${bookmark.username}</button>` : ''}
-          ${bookmark.password ? `<button id="${bookmark.id}-password-copy-btn" class="copy-btn">Password</button>` : ''}
+          ${bookmark.username ? `<button id="${bookmark.id}-username-copy-btn" class="copy-btn">Id</button>` : ''}
+          ${bookmark.password ? `<button id="${bookmark.id}-password-copy-btn" class="copy-btn">P</button>` : ''}
           <button class="edit-btn" onclick="editBookmark(${bookmark.id})">E</button>
           <button class="delete-btn" onclick="deleteBookmark(${bookmark.id})">D</button>
         </li>

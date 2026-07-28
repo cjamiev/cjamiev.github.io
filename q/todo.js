@@ -157,7 +157,7 @@ function renderTodos() {
   container.innerHTML = '';
 
   if (todos.length === 0) {
-    container.innerHTML = '<p class="empty-message">No tasks yet. Add one above!</p>';
+    container.innerHTML = '<p class="todo-empty-message">No tasks yet. Add one above!</p>';
     return;
   }
 

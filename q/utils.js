@@ -22,11 +22,20 @@ function escapeHtml(text) {
 }
 
 function flashBanner() {
-  const modal = document.getElementById('alert-msg');
-  modal.classList.add('show');
+  const element = document.getElementById('alert-msg');
+  element.classList.add('show');
+
+  element.animate([
+    { transform: 'translateX(200%)', opacity: 0 },
+    { transform: 'translateX(0)', opacity: 1 }
+  ], {
+    duration: 250,
+    easing: 'ease-out',
+    fill: 'forwards'
+  });
 
   setTimeout(() => {
-    modal.classList.remove('show');
+    element.classList.remove('show');
   }, 3000);
 }
 
@@ -68,7 +77,7 @@ function backupLocalStorage() {
   const notes = loadFromLocalStorage('notes');
   const todos = loadFromLocalStorage('todos');
 
-  const allItems = {bookmarks, clipboards, notes, todos};
+  const allItems = { bookmarks, clipboards, notes, todos };
 
   downloadFile('q-backup', JSON.stringify(allItems));
 }
