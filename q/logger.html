@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Logger Manager</title>
+  <link rel="stylesheet" href="common.css" />
+  <link rel="stylesheet" href="logger.css" />
+  <style>
+  </style>
+</head>
+
+<body>
+  <div class="layout">
+    <div class="change-date">
+      <button onclick="previousDate()">&lt;</button>
+    </div>
+    <div class="container journal">
+      <h1>Daily Log</h1>
+      <p id="current-date" class="current-date"></p>
+
+      <div id="logger-container" class="">
+        <label for="valueInput">Journal:</label>
+        <textarea id="valueInput" class="journal-textarea" placeholder="What happened today..."
+          spellcheck="false" onblur="addLogger()"></textarea>
+      </div>
+    </div>
+    <div class="change-date">
+      <button onclick="nextDate()">&gt;</button>
+    </div>
+  </div>
+
+  <script src="utils.js"></script>
+  <script src="logger.js"></script>
+</body>
+
+</html>

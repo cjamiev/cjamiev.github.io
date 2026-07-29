@@ -132,7 +132,6 @@ function addNote() {
 
     renderNotes();
     renderNoteTypes();
-    document.getElementById(`${id}-edit-btn`).parentElement.parentElement.classList.add('active');
 }
 
 function editNote(id) {
